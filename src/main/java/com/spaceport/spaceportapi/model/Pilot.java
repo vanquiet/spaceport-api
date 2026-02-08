@@ -1,23 +1,47 @@
 package com.spaceport.spaceportapi.model;
 
-public class Pilot extends BaseEntity {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pilots")
+public class Pilot {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String name;
-    private String licenseCode;
+    private String license;
 
-    public Pilot() {}
-
-    public Pilot(int id, String name, String licenseCode) {
-        this.id = id;
-        this.name = name;
-        this.licenseCode = licenseCode;
+    // ОБЯЗАТЕЛЬНО для JPA
+    public Pilot() {
     }
 
-    @Override
-    public String getType() { return "PILOT"; }
+    // ИСПОЛЬЗУЕМ ТОЛЬКО ЕГО
+    public Pilot(String name, String license) {
+        this.name = name;
+        this.license = license;
+    }
 
-    public String getName() { return name; }
-    public String getLicenseCode() { return licenseCode; }
+    // getters
+    public int getId() {
+        return id;
+    }
 
-    public void setName(String name) { this.name = name; }
-    public void setLicenseCode(String licenseCode) { this.licenseCode = licenseCode; }
+    public String getName() {
+        return name;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    // setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
 }
