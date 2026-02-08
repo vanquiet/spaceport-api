@@ -1,15 +1,28 @@
-package com.spaceport.spaceportapi.exception;
+package com.spaceport.spaceportapi.error;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    public Map<String, String> handle(RuntimeException e) {
-        return Map.of("error", e.getMessage());
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, Object> badRequest(IllegalArgumentException ex) {
+        return Map.of(
+                "error", "bad_request",
+                "message", ex.getMessage()
+        );
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, Object> serverError(Exception ex) {
+        return Map.of(
+                "error", "server_error",
+                "message", ex.getClass().getSimpleName() + ": " + ex.getMessage()
+        );
     }
 }

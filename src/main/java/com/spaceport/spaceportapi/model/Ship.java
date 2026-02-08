@@ -1,31 +1,43 @@
 package com.spaceport.spaceportapi.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "ships")
 public class Ship extends BaseEntity {
 
-    private String model;
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private int capacity;
 
     public Ship() {}
 
-    public Ship(String model, int capacity) {
-        this.model = model;
+    public Ship(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
     @Override
     public String getType() {
         return "SHIP";
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getCapacity() {
-        return capacity;
     }
 }
 

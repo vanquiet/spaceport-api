@@ -19,11 +19,10 @@ public class PilotService {
         return repository.findAll();
     }
 
-    public Pilot save(Pilot pilot) {
+    public Pilot create(Pilot pilot) {
+        if (repository.existsByLicense(pilot.getLicense())) {
+            throw new RuntimeException("Pilot with this license already exists");
+        }
         return repository.save(pilot);
-    }
-
-    public void delete(int id) {
-        repository.deleteById(id);
     }
 }

@@ -1,33 +1,29 @@
-package com.spaceport.spaceportapi.controller;
+package com.spaceport.spaceportapi.service;
 
 import com.spaceport.spaceportapi.model.Pilot;
 import com.spaceport.spaceportapi.repository.PilotRepository;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/pilots")
-public class PilotController {
+@Service
+public class PilotService {
 
     private final PilotRepository repository;
 
-    public PilotController(PilotRepository repository) {
+    public PilotService(PilotRepository repository) {
         this.repository = repository;
     }
 
-    @GetMapping
     public List<Pilot> getAll() {
         return repository.findAll();
     }
 
-    @PostMapping
-    public Pilot create(@RequestBody Pilot pilot) {
+    public Pilot create(Pilot pilot) {
+        // НЕ СТАВИМ id ВРУЧНУЮ
+        if (repository.existsByLicense(pilot.getLicense())) {
+            throw new RuntimeException("Pilot with this license already exists");
+        }
         return repository.save(pilot);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        repository.deleteById(id);
     }
 }

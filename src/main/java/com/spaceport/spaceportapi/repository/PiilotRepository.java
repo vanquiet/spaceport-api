@@ -4,4 +4,5 @@ import com.spaceport.spaceportapi.model.Pilot;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PilotRepository extends JpaRepository<Pilot, Integer> {
+    boolean existsByLicense(String license);
 }

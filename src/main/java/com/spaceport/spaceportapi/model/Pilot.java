@@ -1,13 +1,15 @@
 package com.spaceport.spaceportapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pilots")
 public class Pilot extends BaseEntity {
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String license;
 
     public Pilot() {}
@@ -31,5 +33,10 @@ public class Pilot extends BaseEntity {
 
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    @Override
+    public String getType() {
+        return "PILOT";
     }
 }
