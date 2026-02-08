@@ -7,7 +7,6 @@ public class Mission {
     private Integer durationDays;
     private String cargo;
 
-    // PUBLIC constructor (нужно для Builder из другого пакета)
     public Mission(String title, String destination, Integer durationDays, String cargo) {
         this.title = title;
         this.destination = destination;
