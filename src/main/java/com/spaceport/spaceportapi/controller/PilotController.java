@@ -1,7 +1,7 @@
 package com.spaceport.spaceportapi.controller;
 
 import com.spaceport.spaceportapi.model.Pilot;
-import com.spaceport.spaceportapi.service.PilotService;
+import com.spaceport.spaceportapi.repository.PilotRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,24 +10,24 @@ import java.util.List;
 @RequestMapping("/pilots")
 public class PilotController {
 
-    private final PilotService service;
+    private final PilotRepository repository;
 
-    public PilotController(PilotService service) {
-        this.service = service;
+    public PilotController(PilotRepository repository) {
+        this.repository = repository;
     }
 
     @GetMapping
     public List<Pilot> getAll() {
-        return service.getAll();
+        return repository.findAll();
     }
 
     @PostMapping
     public Pilot create(@RequestBody Pilot pilot) {
-        return service.save(pilot);
+        return repository.save(pilot);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        service.delete(id);
+    public void delete(@PathVariable Integer id) {
+        repository.deleteById(id);
     }
 }

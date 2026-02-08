@@ -1,17 +1,31 @@
 package com.spaceport.spaceportapi.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Ship extends BaseEntity {
-    private String name;
+
+    private String model;
+    private int capacity;
 
     public Ship() {}
-    public Ship(int id, String name) {
-        this.id = id;
-        this.name = name;
+
+    public Ship(String model, int capacity) {
+        this.model = model;
+        this.capacity = capacity;
     }
 
     @Override
-    public String getType() { return "SHIP"; }
+    public String getType() {
+        return "SHIP";
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getModel() {
+        return model;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
+
