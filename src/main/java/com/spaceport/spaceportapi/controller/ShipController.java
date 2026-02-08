@@ -17,22 +17,7 @@ public class ShipController {
     }
 
     @GetMapping
-    public List<Ship> getAll() {
-        return service.getAllShips();
-    }
-
-    @GetMapping("/{id}")
-    public Ship getById(@PathVariable int id) {
-        return service.getShipById(id);
-    }
-
-    @PostMapping
-    public Ship create(@RequestBody Ship ship) {
-        return service.createShip(ship);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        service.deleteShip(id);
+    public List<Ship> getShips() {
+        return service.getAll();
     }
 }

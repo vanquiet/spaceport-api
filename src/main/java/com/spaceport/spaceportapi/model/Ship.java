@@ -4,40 +4,32 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ships")
-public class Ship extends BaseEntity {
+public class Ship {
 
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
 
-    @Column(nullable = false)
-    private int capacity;
+    private Integer capacity;
 
     public Ship() {}
 
-    public Ship(String name, int capacity) {
+    public Ship(String name, Integer capacity) {
         this.name = name;
         this.capacity = capacity;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    @Override
-    public String getType() {
-        return "SHIP";
-    }
 }
-

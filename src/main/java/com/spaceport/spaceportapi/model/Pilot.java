@@ -4,12 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pilots")
-public class Pilot extends BaseEntity {
+public class Pilot {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "license_code", nullable = false, unique = true)
     private String license;
 
     public Pilot() {}
@@ -17,6 +21,10 @@ public class Pilot extends BaseEntity {
     public Pilot(String name, String license) {
         this.name = name;
         this.license = license;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -33,10 +41,5 @@ public class Pilot extends BaseEntity {
 
     public void setLicense(String license) {
         this.license = license;
-    }
-
-    @Override
-    public String getType() {
-        return "PILOT";
     }
 }

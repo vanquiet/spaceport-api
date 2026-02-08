@@ -20,9 +20,15 @@ public class PilotService {
     }
 
     public Pilot create(Pilot pilot) {
+        if (pilot.getLicense() == null || pilot.getLicense().isBlank()) {
+            throw new RuntimeException("License is required");
+        }
+
         if (repository.existsByLicense(pilot.getLicense())) {
             throw new RuntimeException("Pilot with this license already exists");
         }
+
         return repository.save(pilot);
     }
 }
+
