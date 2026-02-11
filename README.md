@@ -1,11 +1,28 @@
-Spaceport API is a backend application developed using Spring Boot as part of the endterm project.
+Spaceport API – Bonus Task (Caching)
 
-The purpose of this project is to demonstrate how a RESTful API works with a relational database using modern Java technologies. The application provides functionality to manage pilots and ships in a spaceport system.
+In this bonus task, caching was added to improve system performance and reduce database load.
 
-The project is built with Java and Maven and uses Spring Boot as the main framework. Spring Data JPA is used for interaction with the PostgreSQL database. The database name used in this project is spaceport_db.
+Spring Cache is enabled in the main application using EnableCaching.
 
-The API supports basic CRUD operations. Data can be retrieved using GET requests and added using POST requests. POST requests are tested and executed using Postman. All responses are returned in JSON format.
+Caching is implemented in the service layer.
 
-The application runs locally on port 8080 and can be accessed via a web browser or API testing tools. Hibernate is used as the ORM layer, and database tables are automatically synchronized with entity classes.
+The following methods use caching:
 
-This project follows a layered architecture, including controllers, services, repositories, and entities. It is designed to be simple, clear, and suitable for academic demonstration of backend development concepts.
+getAllPilots
+getPilotById
+getAllShips
+getShipById
+
+Cacheable is used for GET operations. When data is requested for the first time, it is loaded from the database and stored in memory. The next time the same request is made, the data is returned from cache instead of the database.
+
+CacheEvict is used for POST, PUT and DELETE operations. When data is created, updated or deleted, the cache is cleared to keep data consistent.
+
+ConcurrentMapCacheManager is used as the cache manager. It stores data in memory.
+
+Benefits of caching:
+
+Faster responses
+Fewer database queries
+Better performance
+
+This implementation keeps clean architecture because caching is placed in the service layer and does not affect controllers or repositories.
