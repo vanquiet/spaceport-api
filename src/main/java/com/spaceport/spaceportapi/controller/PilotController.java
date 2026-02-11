@@ -21,8 +21,25 @@ public class PilotController {
         return service.getAll();
     }
 
+    @GetMapping("/{id}")
+    public Pilot getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
     @PostMapping
     public Pilot create(@RequestBody Pilot pilot) {
         return service.create(pilot);
     }
+
+    @PutMapping("/{id}")
+    public Pilot update(@PathVariable Long id, @RequestBody Pilot pilot) {
+        return service.update(id, pilot);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+
 }

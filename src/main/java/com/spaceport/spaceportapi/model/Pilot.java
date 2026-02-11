@@ -8,12 +8,12 @@ public class Pilot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "license_code", nullable = false, unique = true)
+    @Column(name = "license_code", nullable = false)
     private String license;
 
     public Pilot() {}
@@ -23,23 +23,13 @@ public class Pilot {
         this.license = license;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getLicense() { return license; }
 
-    public String getName() {
-        return name;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setLicense(String license) { this.license = license; }
 
-    public String getLicense() {
-        return license;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLicense(String license) {
-        this.license = license;
-    }
 }
